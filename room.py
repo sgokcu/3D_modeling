@@ -11,20 +11,20 @@ def draw_polygons(screen, center_x, center_y, line_width):
                                                   (center_x + int(950), center_y - int(500)),
                                                   (center_x - int(950), center_y - int(500))])
 
-    pygame.draw.polygon(screen, (0, 0, 128), [(center_x + int(100), center_y - int(50)),
-                                             (center_x + int(100), center_y + int(250)),
-                                             (center_x + int(368), center_y + int(384)),
-                                             (center_x + int(368), center_y - int(84))], line_width)
+    pygame.draw.polygon(screen, (0, 0, 128), [(center_x + int(70) + 70, center_y - int(25)),
+                                          (center_x + int(70) + 70, center_y + int(125)),
+                                          (center_x + int(204) + 70, center_y + int(192)),
+                                          (center_x + int(204) + 70, center_y - int(42))], line_width)
 
-    pygame.draw.polygon(screen, (135, 206, 235), [(center_x + int(103), center_y - int(49)),
-                                                 (center_x + int(103), center_y + int(249)),
-                                                 (center_x + int(367), center_y + int(383)),
-                                                 (center_x + int(367), center_y - int(83))])
+    pygame.draw.polygon(screen, (135, 206, 235), [(center_x + int(72) + 70, center_y - int(24)),
+                                                (center_x + int(72) + 70, center_y + int(124)),
+                                                (center_x + int(203) + 70, center_y + int(191)),
+                                                (center_x + int(203) + 70, center_y - int(41))])
 
-    pygame.draw.line(screen, (0, 0, 128), (center_x + int(100), center_y + int(110)),
-                     (center_x + int(368), center_y + int(110)), line_width)  # Horizontal line
-    pygame.draw.line(screen, (0, 0, 128), (center_x + int(220), center_y - int(65)),
-                     (center_x + int(220), center_y + int(310)), line_width)  # Vertical Line
+    pygame.draw.line(screen, (0, 0, 128), (center_x + int(70) + 70, center_y + int(55)),
+                    (center_x + int(204) + 70, center_y + int(55)), line_width)  # Horizontal line
+    pygame.draw.line(screen, (0, 0, 128), (center_x + int(130) + 70, center_y - int(32)),
+                    (center_x + int(130) + 70, center_y + int(155)), line_width)  # Vertical Line
 
 
 
