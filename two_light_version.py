@@ -22,7 +22,6 @@ def init():
     glEnable(GL_LIGHTING)  # Aydınlatmayı etkinleştir
     glEnable(GL_LIGHT0)    # İlk ışık kaynağını etkinleştir
     glEnable(GL_LIGHT1)    # İkinci ışık kaynağını etkinleştir
-    glEnable(GL_LIGHT2)    # Tavandan gelen ışık kaynağını etkinleştir
     glEnable(GL_NORMALIZE) # Yüzey normallerini normalize et
     glEnable(GL_COLOR_MATERIAL)  # Malzeme renk özelliklerini etkinleştir
 
@@ -47,17 +46,6 @@ def init():
     glLightfv(GL_LIGHT1, GL_AMBIENT, light1_ambient)
     glLightfv(GL_LIGHT1, GL_DIFFUSE, light1_diffuse)
     glLightfv(GL_LIGHT1, GL_SPECULAR, light1_specular)
-
-    # Tavandan gelen ışık kaynağı özellikleri
-    light2_position = [0.0, 5.0, 0.0, 1.0]  # Tavandan aşağıya doğru gelen ışık
-    light2_ambient = [0.1, 0.1, 0.1, 1.0]    # Ortam ışığı
-    light2_diffuse = [0.9, 0.9, 0.8, 1.0]    # Yayılma ışığı
-    light2_specular = [1.0, 1.0, 0.9, 1.0]   # Yansıma ışığı
-
-    glLightfv(GL_LIGHT2, GL_POSITION, light2_position)
-    glLightfv(GL_LIGHT2, GL_AMBIENT, light2_ambient)
-    glLightfv(GL_LIGHT2, GL_DIFFUSE, light2_diffuse)
-    glLightfv(GL_LIGHT2, GL_SPECULAR, light2_specular)
 
 def gradient_color(start_color, end_color, factor):
     return [
@@ -277,5 +265,5 @@ def main():
     glutIdleFunc(display)
     glutMainLoop()
 
-if __name__== "__main__":
+if __name__ == "__main__":
     main()
