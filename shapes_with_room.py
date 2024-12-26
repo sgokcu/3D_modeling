@@ -10,8 +10,6 @@ def init():
     glClearColor(0.5, 0.5, 0.5, 1)  # Arka plan rengi (nötr gri)
 
 # Gradyan rengi hesaplayan fonksiyon
-
-# 3D oda çizimi
 def gradient_color(start_color, end_color, factor):
     return [
         start_color[i] + (end_color[i] - start_color[i]) * factor
@@ -19,41 +17,62 @@ def gradient_color(start_color, end_color, factor):
     ]
 
 def draw_cube():
-    glColor3f(0.529, 0.808, 0.922)
-    glutSolidCube(0.5)
+    # Pastel sarıdan daha açık sarıya gradyan
+    for i in range(20):
+        factor = i / 20.0
+        glColor3fv(gradient_color([0.4, 0.4, 0.6], [0.3, 0.2, 0.4], factor))  # Pastel sarıdan açık sarıya geçiş
+        glutSolidCube(0.5)
 
 def draw_sphere():
-    # glColor3f(0, 1, 0)  # Yeşil renk
-    glutSolidSphere(0.3, 20, 20)
-    
+    # Mor tonları gradyanı
+    for i in range(20):
+        factor = i / 20.0
+        glColor3fv(gradient_color([0.5, 0.0, 0.5], [0.8, 0.2, 0.8], factor))  # Mordan pembeye geçiş
+        glutSolidSphere(0.3, 20, 20)
+
 def draw_cylinder():
-    # glColor3f(0, 0, 1)  # Mavi renk
+    # Lila tonları gradyanı
     quad = gluNewQuadric()
-    gluCylinder(quad, 0.2, 0.2, 0.5, 32, 32)
+    for i in range(20):
+        factor = i / 20.0
+        glColor3fv(gradient_color([0.7, 0.5, 1.0], [0.9, 0.7, 1.0], factor))  # Liladan açık lilaya geçiş
+        gluCylinder(quad, 0.2, 0.2, 0.5, 32, 32)
 
 def draw_pyramid():
-    # glColor3f(1, 1, 0)  # Sarı renk
+    # Cam göbeği tonları
     glBegin(GL_TRIANGLES)
     
     # Ön yüz
-    glVertex3f(0, 0.5, 0)
-    glVertex3f(-0.5, -0.5, 0.5)
-    glVertex3f(0.5, -0.5, 0.5)
+    for i in range(20):
+        factor = i / 20.0
+        glColor3fv(gradient_color([0.7, 0.3, 0.4], [0.5, 0.2, 0.2], factor))  # Cam göbeği tonları
+        glVertex3f(0, 0.5, 0)
+        glVertex3f(-0.5, -0.5, 0.5)
+        glVertex3f(0.5, -0.5, 0.5)
     
     # Sağ yüz
-    glVertex3f(0, 0.5, 0)
-    glVertex3f(0.5, -0.5, 0.5)
-    glVertex3f(0.5, -0.5, -0.5)
+    for i in range(20):
+        factor = i / 20.0
+        glColor3fv(gradient_color([0.7, 0.3, 0.4], [0.5, 0.2, 0.2], factor))  # Cam göbeği tonları
+        glVertex3f(0, 0.5, 0)
+        glVertex3f(0.5, -0.5, 0.5)
+        glVertex3f(0.5, -0.5, -0.5)
     
     # Sol yüz
-    glVertex3f(0, 0.5, 0)
-    glVertex3f(-0.5, -0.5, -0.5)
-    glVertex3f(-0.5, -0.5, 0.5)
+    for i in range(20):
+        factor = i / 20.0
+        glColor3fv(gradient_color([0.7, 0.3, 0.4], [0.5, 0.2, 0.2], factor))  # Cam göbeği tonları
+        glVertex3f(0, 0.5, 0)
+        glVertex3f(-0.5, -0.5, -0.5)
+        glVertex3f(-0.5, -0.5, 0.5)
     
     # Arka yüz
-    glVertex3f(0, 0.5, 0)
-    glVertex3f(0.5, -0.5, -0.5)
-    glVertex3f(-0.5, -0.5, -0.5)
+    for i in range(20):
+        factor = i / 20.0
+        glColor3fv(gradient_color([0.7, 0.3, 0.4], [0.5, 0.2, 0.2], factor))  # Cam göbeği tonları
+        glVertex3f(0, 0.5, 0)
+        glVertex3f(0.5, -0.5, -0.5)
+        glVertex3f(-0.5, -0.5, -0.5)
 
     glEnd()
 
@@ -63,10 +82,7 @@ def draw_room():
     # Zemin (gradyan: koyu gri - orta gri)
     for i in range(10):
         factor = i / 10.0
-
-        glColor3fv(gradient_color([0.6, 0.3, 0.3], [0.5, 0.2, 0.2], factor))  # begendigimiz
-
-
+        glColor3fv(gradient_color([0.6, 0.3, 0.3], [0.5, 0.2, 0.2], factor))  # Begendigimiz
         glVertex3f(-2 + i * 0.4, -1, -5)
         glVertex3f(-1.6 + i * 0.4, -1, -5)
         glVertex3f(-1.6 + i * 0.4, -1, -1)
@@ -76,7 +92,6 @@ def draw_room():
     for i in range(10):
         factor = i / 10.0
         glColor3fv(gradient_color([0.8, 0.6, 0.6], [0.9, 0.7, 0.7], factor))
-
         glVertex3f(-2 + i * 0.4, 1, -5)
         glVertex3f(-1.6 + i * 0.4, 1, -5)
         glVertex3f(-1.6 + i * 0.4, 1, -1)
@@ -86,8 +101,6 @@ def draw_room():
     for i in range(10):
         factor = i / 10.0
         glColor3fv(gradient_color([0.8, 0.6, 0.6], [0.9, 0.7, 0.7], factor))
-        
-
         glVertex3f(-2 + i * 0.4, -1, -5)
         glVertex3f(-1.6 + i * 0.4, -1, -5)
         glVertex3f(-1.6 + i * 0.4, 1, -5)
@@ -97,7 +110,6 @@ def draw_room():
     for i in range(10):
         factor = i / 10.0
         glColor3fv(gradient_color([0.8, 0.6, 0.6], [0.9, 0.7, 0.7], factor))
-
         glVertex3f(-2, -1 + i * 0.2, -5)
         glVertex3f(-2, -0.8 + i * 0.2, -5)
         glVertex3f(-2, -0.8 + i * 0.2, -1)
@@ -107,19 +119,17 @@ def draw_room():
     for i in range(10):
         factor = i / 10.0
         glColor3fv(gradient_color([0.8, 0.6, 0.6], [0.9, 0.7, 0.7], factor))
-
         glVertex3f(2, -1 + i * 0.2, -5)
         glVertex3f(2, -0.8 + i * 0.2, -5)
         glVertex3f(2, -0.8 + i * 0.2, -1)
         glVertex3f(2, -1 + i * 0.2, -1)
 
     glEnd()
-    
+
 def set_material(diffuse, specular, shininess):
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, diffuse)  # Yayılma ve ortam ışığı
     glMaterialfv(GL_FRONT, GL_SPECULAR, specular)  # Yansıtıcı ışık
     glMaterialf(GL_FRONT, GL_SHININESS, shininess)  # Parlaklık
-
 
 def display():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
@@ -127,44 +137,40 @@ def display():
     gluLookAt(0, 0, 0, 0, 0, -1, 0, 1, 0)
 
     draw_room()
-    
-    # Cube
+
+    # Cube (pastel sarıdan açık sarıya gradyan)
     glPushMatrix()
     glTranslatef(-1, -0.5, -3)
     glScalef(0.9, 0.9, 0.9)
-    set_material((0, 0, 1, 1), (1, 1, 1, 1), 50)
+    set_material((1.0, 1.0, 0.9, 1), (1, 1, 1, 1), 50)
     draw_cube()
     glPopMatrix()
-    
-    # Sphere
+
+    # Sphere (mordan pembeye gradyan)
     glPushMatrix()
     glTranslatef(0.25, -0.5, -3)
     glScalef(0.9, 0.9, 0.9)
-    set_material((0, 0, 1, 1), (1, 1, 1, 1), 50)  # Mavi renk, beyaz parlaklık, orta parlaklık
+    set_material((0.5, 0.0, 0.5, 1), (1, 1, 1, 1), 50)
     draw_sphere()
-
     glPopMatrix()
-    
-      
-    # Silindir
+
+    # Silindir (liladan açık lilaya gradyan)
     glPushMatrix()
     glTranslatef(-0.25, -0.5, -2)
     glRotatef(-90, 1, 0, 0)
     glScalef(0.8, 0.8, 0.8)
-    set_material((0, 0, 1, 1), (1, 1, 1, 1), 50)  # Mavi renk, beyaz parlaklık, orta parlaklık
+    set_material((0.7, 0.5, 1.0, 1), (1, 1, 1, 1), 50)
     draw_cylinder()
-
     glPopMatrix()
-    
-    # Üçgen Pramit
+
+    # Üçgen Pramit (cam göbeği tonları gradyan)
     glPushMatrix()
     glTranslatef(1.022, -0.5, -3.25)
     glScalef(0.6, 0.6, 0.6)
-    set_material((0, 0, 1, 1), (1, 1, 1, 1), 50)  # Mavi renk, beyaz parlaklık, orta parlaklık
+    set_material((0.0, 1.0, 1.0, 1), (1, 1, 1, 1), 5)
     draw_pyramid()
-
     glPopMatrix()
-    
+
     glutSwapBuffers()
 
 def reshape(w, h):
