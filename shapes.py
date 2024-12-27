@@ -1,68 +1,64 @@
-import pygame
-import math
+from OpenGL.GL import *
+from OpenGL.GLUT import *
+from OpenGL.GLU import *
 
-def draw_cube(screen, center_x, center_y, angle_x=0, angle_y=0):
-    size = 50
-    # Define the square vertices of the cube
-    points = [
-        (center_x - size//2, center_y - size//2),
-        (center_x + size//2, center_y - size//2),
-        (center_x + size//2, center_y + size//2),
-        (center_x - size//2, center_y + size//2)
+# bu fonk sorulur
+def set_material(diffuse, specular, shininess):
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, diffuse)
+    glMaterialfv(GL_FRONT, GL_SPECULAR, specular)
+    glMaterialf(GL_FRONT, GL_SHININESS, shininess)
+
+def gradient_color(start_color, end_color, factor):
+    return [
+        start_color[i] + (end_color[i] - start_color[i]) * factor
+        for i in range(3)
     ]
-    
-    # Rotate points around the center (center_x, center_y) on both axes
-    rotated_points = []
-    for (x, y) in points:
-        # Translate the point to the origin for rotation
-        x -= center_x
-        y -= center_y
-        
-        # Rotate around Y-axis (horizontal axis)
-        rotated_x = x * math.cos(angle_y) - y * math.sin(angle_y)
-        rotated_y = x * math.sin(angle_y) + y * math.cos(angle_y)
-        
-        # Rotate around X-axis (vertical axis)
-        rotated_x_3d = rotated_x
-        rotated_y_3d = rotated_y * math.cos(angle_x) - rotated_x * math.sin(angle_x)
-
-        # Translate back to the original position
-        rotated_x_3d += center_x
-        rotated_y_3d += center_y
-        
-        rotated_points.append((rotated_x_3d, rotated_y_3d))
-
-    # Draw the rotated square (cube)
-    pygame.draw.polygon(screen, (0, 128, 0), rotated_points)
+def draw_cube():
+    set_material((0.8, 0.6, 0.9, 1.0), (0.9, 0.7, 1.0, 1.0), 128)
+    for i in range(20):
+        factor = i / 20.0
+        glColor3fv(gradient_color([0.7, 0.5, 0.8], [0.8, 0.6, 0.9], factor))
+        glutSolidCube(0.5)
 
 
-def draw_sphere(screen, center_x, center_y):
-    radius = 40
-    pygame.draw.circle(screen, (255, 0, 0), (center_x, center_y), radius)
-
-def draw_pyramid(screen, center_x, center_y):
-    points = [
-        (center_x, center_y - 40),
-        (center_x - 40, center_y + 40),
-        (center_x + 40, center_y + 40)
-    ]
-    pygame.draw.polygon(screen, (255, 255, 0), points)
-
-def draw_cylinder(screen, center_x, center_y):
-    radius = 30
-    height = 60
-    pygame.draw.circle(screen, (0, 0, 255), (center_x, center_y), radius)
-    pygame.draw.rect(screen, (0, 0, 255), (center_x - radius, center_y, 2 * radius, height))
-    pygame.draw.circle(screen, (0, 0, 255), (center_x, center_y + height), radius)
+def draw_sphere():
+    set_material((0.9, 0.3, 0.6, 1.0), (1.0, 0.5, 0.8, 1.0), 128)
+    for i in range(20):
+        factor = i / 20.0
+        glColor3fv(gradient_color([0.8, 0.2, 0.5], [0.9, 0.3, 0.6], factor))
+        glutSolidSphere(0.3, 64, 64)
 
 
-def calculate_center(center_x, center_y):
-    x1, y1 = center_x + int(26), center_y + int(181)
-    x2, y2 = center_x - int(100), center_y + int(100)
-    x3, y3 = center_x - int(600), center_y + int(250)
-    x4, y4 = center_x - int(124), center_y + int(331)
+def draw_cylinder():
+    set_material((0.6, 0.8, 1.0, 0.4), (0.9, 1.0, 1.0, 0.6), 64)  # Şeffaf cam efekti için malzeme
+    quad = gluNewQuadric()
+    for i in range(20):
+        factor = i / 20.0
+        glColor4f(0.6 + factor * 0.2, 0.8 + factor * 0.1, 1.0, 0.2 + factor * 0.1)
+        gluCylinder(quad, 0.2, 0.2, 0.5, 64, 64)
 
-    center_x = (x1 + x2 + x3 + x4) / 4
-    center_y = (y1 + y2 + y3 + y4) / 4
+def draw_pyramid():
+    set_material((0.9, 0.7, 0.4, 1.0), (1.0, 1.0, 0.8, 1.0), 128)  # Parlak yüzey ve ışık yansıtıcı malzeme özellikleri
+    glBegin(GL_TRIANGLES)
 
-    return int(center_x), int(center_y)
+    glColor3fv([0.9, 0.6, 0.3])  # Ön yüz rengi
+    glVertex3f(0, 0.5, 0)
+    glVertex3f(-0.5, -0.5, 0.5)
+    glVertex3f(0.5, -0.5, 0.5)
+
+    glColor3fv([0.8, 0.5, 0.3])  # Sağ yüz rengi
+    glVertex3f(0, 0.5, 0)
+    glVertex3f(0.5, -0.5, 0.5)
+    glVertex3f(0.5, -0.5, -0.5)
+
+    glColor3fv([0.8, 0.4, 0.2])  # Sol yüz rengi
+    glVertex3f(0, 0.5, 0)
+    glVertex3f(-0.5, -0.5, -0.5)
+    glVertex3f(-0.5, -0.5, 0.5)
+
+    glColor3fv([0.7, 0.4, 0.2])  # Arka yüz rengi
+    glVertex3f(0, 0.5, 0)
+    glVertex3f(0.5, -0.5, -0.5)
+    glVertex3f(-0.5, -0.5, -0.5)
+
+    glEnd()
