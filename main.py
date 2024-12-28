@@ -129,7 +129,7 @@ def main():
     glutInit()
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH)
     glutInitWindowSize(width, height)
-    glutCreateWindow(b"3D Lighting and Keyboard Interaction")
+    glutCreateWindow(b"3D room")
     init()
 
     glutDisplayFunc(display)
