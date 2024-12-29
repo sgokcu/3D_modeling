@@ -1,14 +1,11 @@
 from OpenGL.GL import *
 
 def setup_global_lighting():
-    # Global ambient light settings
-    global_ambient = [0.3, 0.3, 0.3, 1.0]
+    global_ambient = [0.4, 0.4, 0.4, 1.0]
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient)
     
-    # Enable two sided lighting
     glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE)
     
-    # Enable local viewer mode for more accurate specular reflections
     glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE)
 
 def f_light_position():

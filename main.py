@@ -6,6 +6,7 @@ from math import sin, cos
 from shapes import *
 from rotating import Rotation
 from controls import Control
+from shadow import *
 
 width, height = 800, 600
 
@@ -106,6 +107,7 @@ def display():
     )
     Rotation.update()
     draw_room()
+    draw_shadow()
     draw_shapes()
     glutSwapBuffers()
 
