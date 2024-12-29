@@ -5,8 +5,6 @@ from OpenGL.GLUT import *
 from lighting import *
 
 class Control:
-    camera_x = 0
-    camera_y = 0
     camera_x = 0.0
     camera_y = 0.0
     camera_z = 0.0

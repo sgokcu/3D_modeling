@@ -28,7 +28,6 @@ def draw_shapes():
 
     glPushMatrix()
     glTranslatef(0.25, -0.5, -2.5)
-    glRotatef(Rotation.angle_sphere, 0, 1, 0)
     set_material((0.5, 0.0, 0.5, 1), (1, 1, 1, 1), 50)
     draw_sphere()
     glPopMatrix()
@@ -36,7 +35,6 @@ def draw_shapes():
     glPushMatrix()
     glTranslatef(-0.30, -0.5, -1.75)
     glRotatef(-90, 1, 0, 0)
-    glRotatef(Rotation.angle_cylinder, 0, 0, 1)    
     set_material((0.7, 0.5, 1.0, 1), (1, 1, 1, 1), 50)
     draw_cylinder()
     glPopMatrix()
@@ -108,7 +106,6 @@ def display():
     )
     Rotation.update()
     draw_room()
-    # draw_shadow()
     draw_shapes()
     glutSwapBuffers()
 
