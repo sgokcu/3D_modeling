@@ -110,7 +110,6 @@ def display():
     glutSwapBuffers()
 
 
-# bu belki sorulur
 def reshape(w, h):
     global width, height
     width, height = w, h
@@ -121,7 +120,6 @@ def reshape(w, h):
     glMatrixMode(GL_MODELVIEW)
 
 
-# bu kesin
 def main():
     glutInit()
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH)
