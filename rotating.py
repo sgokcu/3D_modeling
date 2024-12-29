@@ -12,6 +12,5 @@ class Rotation:
         Rotation.angle_cube += Rotation.speed_cube
         Rotation.angle_pyramid += Rotation.speed_pyramid
 
-        # Açılar 360 dereceyi aşarsa sıfırla
         Rotation.angle_cube %= 360
         Rotation.angle_pyramid %= 360
